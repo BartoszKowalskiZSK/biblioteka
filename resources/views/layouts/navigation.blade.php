@@ -4,6 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
+                @auth
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -12,13 +13,42 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
+                    <x-nav-link :href="route('your-books')" :active="request()->routeIs('your-books')">
+                        {{ __('Twoje książki') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('rent-books')" :active="request()->routeIs('rent-books')">
+                        {{ __('Książki') }}
+                    </x-nav-link>
+                </div>
+                @endauth
+                <!-- GUEST -->
+                @guest
+                <div class="shrink-0 flex items-center">
+                    <a href="{{ route('welcome') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Informacje') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                        {{ __('Kontakt') }}
+                    </x-nav-link>
+                </div>
+                @endguest
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -51,6 +81,7 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -97,4 +128,5 @@
             </div>
         </div>
     </div>
+    @endauth
 </nav>
