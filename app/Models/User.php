@@ -21,6 +21,7 @@ class User extends Authenticatable
         'email',
         'password',
         'privillages',
+        'amount',
     ];
 
     /**
@@ -56,4 +57,13 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    protected static function boot()
+{
+    parent::boot();
+
+    static::creating(function ($user) {
+        $user->amount = 3;
+    });
+}
 }
