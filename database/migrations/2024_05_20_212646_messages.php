@@ -16,6 +16,12 @@ return new class extends Migration
             $table->string('topic');
             $table->text('description');
             $table->string('email');
+            $table->int('user_id')->unsigned()->nullable();
+            $table->timestamp('time');
+
+            $table->foreign('user_id')
+                ->references('user_id')
+                ->on('users');
         });
     }
 
