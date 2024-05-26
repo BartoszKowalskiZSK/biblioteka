@@ -25,24 +25,33 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/contact', function () {
-    if(auth()->check() && Auth()->user()->can('store', Book::class)){
-        return view('contact');
-    }
+Route::get('/welcome', function(){
+    return view('welcome');
+})->name('welcome');
+
+Route::get('/register', function(){
+    return view('register');
+})->name('register');
+
+Route::get('/contact', function(){
+    return view('contact');
 })->name('contact');
 
-Route::get('/your-books', function () {
-    return view('your-books');
-})->name('your-books');
+Route::get('/books', function(){
+    return view('books');
+})->name('books');
 
-Route::get('/rent-books', function () {
-    return view('rent-books');
-})->middleware('auth')->name('rent-books');
+Route::middleware(['auth','privillages:5'])->group(function () {
+    Route::get('your-rents', function(){
+        return view('your-rents');
+    })->name('your-rents');
 
-Route::get('/add-book', function () {
-    return view('add-book');
-})->middleware('auth');
+    Route::get('/cart', function(){
+        return view('cart');
+    })->name('cart');
+
+});
 
 
-Route::get('/search', [BookController::class, 'searchById'])->name('book.search');
+
 
