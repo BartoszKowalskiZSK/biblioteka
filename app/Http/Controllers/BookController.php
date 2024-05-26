@@ -20,7 +20,7 @@ class BookController extends Controller
         ]);
 
         if($validatedData->fails()){
-            return redirect()->back()->withErrors($validatedData->errors())->withInput();
+            return redirect()->back()->flash('error',$validatedData->errors())->withInput();
         }
         $book = new Book;
         $book->name = $request->input('name');
@@ -30,7 +30,7 @@ class BookController extends Controller
         $book->amount = $request->input('amount');
         $book->save();
 
-        return redirect()->back()->with('success', 'Książka dodana pomyślnie!');
+        return redirect()->back()->flash('success', 'Książka dodana pomyślnie!');
     }
 
     public function update(Request $request, $id)
@@ -38,7 +38,7 @@ class BookController extends Controller
         try {
             $book = Book::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Nie znaleziono książki o podanym ID');
+            return redirect()->back()->flash('error', 'Nie znaleziono książki o podanym ID')->withInput();
         }
 
         $validatedData = Validator::make($request->all(), [
@@ -50,7 +50,7 @@ class BookController extends Controller
         ]);
 
         if ($validatedData->fails()) {
-            return redirect()->back()->withErrors($validatedData->errors())->withInput();
+            return redirect()->back()->flash('error',$validatedData->errors())->withInput();
         }
 
         $hasChanged = false;
@@ -80,12 +80,12 @@ class BookController extends Controller
         }
 
         if (!$hasChanged) {
-            return redirect()->back()->with('success', 'Brak zmian do zapisania');
+            return redirect()->back()->flash('success', 'Brak zmian do zapisania');
         }
 
         $book->save();
 
-        return redirect()->back()->with('success', 'Książka zaktualizowana pomyślnie!');
+        return redirect()->back()->flash('success', 'Książka zaktualizowana pomyślnie!');
     }
 
     public function read($id)
@@ -93,7 +93,7 @@ class BookController extends Controller
         try {
             $book = Book::findOrFail($id);
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Nie znaleziono książki o podanym ID');
+            return redirect()->back()->flash('error', 'Nie znaleziono książki o podanym ID')->withInput();
         }
 
         return view('book.read', ['book' => $book]);
@@ -105,10 +105,12 @@ class BookController extends Controller
             $book = Book::findOrFail($id);
             $book->delete();
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Nie znaleziono książki o podanym ID');
+            return redirect()->back()->flash('error', 'Nie znaleziono książki o podanym ID')->withInput();
         }
 
-        return redirect()->back()->with('success', 'Książka usunięta pomyślnie!');
+        return redirect()->back()->flash('success', 'Książka usunięta pomyślnie!');
     }
+
+
 }
 

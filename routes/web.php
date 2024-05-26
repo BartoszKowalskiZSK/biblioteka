@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Models\Book;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +26,9 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/contact', function () {
-    return view('contact');
+    if(auth()->check() && Auth()->user()->can('store', Book::class)){
+        return view('contact');
+    }
 })->name('contact');
 
 Route::get('/your-books', function () {
@@ -38,3 +42,7 @@ Route::get('/rent-books', function () {
 Route::get('/add-book', function () {
     return view('add-book');
 })->middleware('auth');
+
+
+Route::get('/search', [BookController::class, 'searchById'])->name('book.search');
+

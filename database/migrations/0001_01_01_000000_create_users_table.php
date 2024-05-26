@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('privillages',[1,5,10]);
-            $table->int('amount');
+            $table->integer('amount');
             $table->rememberToken();
             $table->timestamps();
         });

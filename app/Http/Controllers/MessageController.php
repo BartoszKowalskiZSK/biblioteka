@@ -11,6 +11,7 @@ class MessageController extends Controller
 {
     public function store(Request $request)
     {
+        //TODO IF USER->CAN() (zmiana walidacji)
         $validatedData = Validator::make($request->all(),[
             'topic' => 'required|string|max:255',
             'description' => 'required|string',
@@ -18,7 +19,7 @@ class MessageController extends Controller
         ]);
 
         if($validatedData->fails()){
-            return redirect()->back()->withErrors($validatedData->errors())->withInput();
+            return redirect()->back()->flash('error',$validatedData->errors())->withInput();
         }
 
         $message = new Message;
@@ -30,30 +31,32 @@ class MessageController extends Controller
 
         $message->save();
 
-        return redirect()->back()->with('success', 'Wiadomość została przesłana pomyślnie!');
+        return redirect()->back()->flash('success','Wiadomość została przesłana pomyślnie!');
     }
 
-    public function read($id)
+    public function readToday()
     {
         try {
-            $message = Message::findOrFail($id);
+            $message = Message::whereDate('time', now()->toDateString())->get();
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Nie znaleziono wiadomości o podanym ID');
+            return redirect()->back()->flash('error','Nie znaleziono wiadomości o podanym ID');
         }
-
-        return view('message.read', ['message' => $message]);
+        if(empty($message)){
+            redirect()->back()->flash('blank','Nie znaleziono wiadomości z dzisiaj');
+        }
+        return redirect()->back()->with('message' , $message);
     }
 
 
-public function delete($id)
-    {
-        try {
-            $message = Message::findOrFail($id);
-            $message->delete();
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->with('error', 'Nie znaleziono wiadomości o podanym ID');
-        }
+    public function delete($id)
+        {
+            try {
+                $message = Message::findOrFail($id);
+                $message->delete();
+            } catch (ModelNotFoundException $e) {
+                return redirect()->back()->flash('error', 'Nie znaleziono wiadomości o podanym ID');
+            }
 
-        return redirect()->back()->with('success', 'Wiadomość usunięta pomyślnie!');
+            return redirect()->back()->flash('success', 'Wiadomość usunięta pomyślnie!');
+        }
     }
-}
