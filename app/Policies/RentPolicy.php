@@ -29,7 +29,7 @@ class RentPolicy
         return Auth()->user()->privillages==5;
     }
 
-    public function delete(){
+    public function softDelete(){
         return Auth()->user()->privillages==1 || Auth()->user()->privillages==5;
     }
 }

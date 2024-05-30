@@ -19,7 +19,7 @@ class MessageController extends Controller
         ]);
 
         if($validatedData->fails()){
-            return redirect()->back()->flash('error',$validatedData->errors())->withInput();
+            return redirect()->back()->with('errors', $validatedData->errors())->withInput();
         }
 
         $message = new Message;
@@ -44,7 +44,20 @@ class MessageController extends Controller
         if(empty($message)){
             redirect()->back()->flash('blank','Nie znaleziono wiadomości z dzisiaj');
         }
-        return redirect()->back()->with('message' , $message);
+        return view('messages')->with('message' , $message)->with('today','today');
+    }
+
+    public function readAll()
+    {
+        try {
+            $message = Message::all();
+        } catch (ModelNotFoundException $e) {
+            return redirect()->back()->flash('error','Nie znaleziono wiadomości o podanym ID');
+        }
+        if(empty($message)){
+            redirect()->back()->flash('blank','Nie znaleziono wiadomości z dzisiaj');
+        }
+        return view('messages')->with('message' , $message)->with('all','all');
     }
 
 
@@ -59,4 +72,5 @@ class MessageController extends Controller
 
             return redirect()->back()->flash('success', 'Wiadomość usunięta pomyślnie!');
         }
-    }
+
+}

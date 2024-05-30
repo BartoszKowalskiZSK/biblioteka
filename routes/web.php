@@ -4,6 +4,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MessageController;
 use App\Models\Book;
 
 Route::get('/', function () {
@@ -41,17 +42,6 @@ Route::get('/books', function(){
     return view('books');
 })->name('books');
 
-Route::middleware(['auth','privillages:5'])->group(function () {
-    Route::get('your-rents', function(){
-        return view('your-rents');
-    })->name('your-rents');
-
-    Route::get('/cart', function(){
-        return view('cart');
-    })->name('cart');
-
-});
-
-
-
-
+Route::post('/store-message', [MessageController::class, 'store'])->name('message.store');
+Route::get('/today', [MessageController::class, 'readToday'])->name('message.read.today');
+Route::get('/all', [MessageController::class, 'readAll'])->name('message.read.all');

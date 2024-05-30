@@ -17,6 +17,8 @@ class RentController extends Controller
             $rent->book_id = $bookId;
             $rent->rent = now();
             $rent->due = now()->addDays(14);
+            $rent->completed = false;
+            $rent->ended=false;
             $rent->save();
 
             $rents[] = $rent;
@@ -43,9 +45,10 @@ class RentController extends Controller
         return $rents;
     }
 
-    public function delete($rentId){
-        Rent::find($rentId)->delete();
-    
+    public function softDelete($rentId){
+        $rent = Rent::find($rentId);
+        $rent->ended=true;;
+        $rent->save();
         return redirect()->back()->flash('success','Wypożyczenie zostało usunięte');
     }
 

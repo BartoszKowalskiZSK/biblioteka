@@ -39,6 +39,8 @@ return new class extends Migration
             $table->foreign('book_id')->references('id')->on('books');
             $table->timestamp('rent');
             $table->timestamp('due');
+            $table->completed('completed');
+            $table->boolean('returned');
         });
         
         Schema::create('messages', function(Blueprint $table){

@@ -12,7 +12,7 @@
                     <h3 class="text-2xl font-bold mb-4">{{ __('Kontakt') }}</h3>
                     <p>{{ __('Proszę wypełnić poniższy formularz, aby skontaktować się z nami.') }}</p>
                    
-                    <form method="POST" action="{{ url('contact') }}" class="mt-6">
+                    <form method="POST" action="{{ route('message.store') }}" class="mt-6">
                         @csrf
 
                         <div class="mb-4">
