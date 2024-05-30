@@ -39,6 +39,11 @@ Route::get('/contact', function(){
 Route::get('/books', function(){
     return view('books');
 })->name('books');
+
+Route::get('/your-books', function(){
+    return view('your-books');
+})->name('your-books');
+
 //Message
 Route::post('/store-message', [MessageController::class, 'store'])->name('message.store');
 Route::get('/today', [MessageController::class, 'readToday'])->name('message.read.today');
