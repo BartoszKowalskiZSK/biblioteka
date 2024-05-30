@@ -30,9 +30,6 @@ Route::get('/welcome', function(){
     return view('welcome');
 })->name('welcome');
 
-Route::get('/register', function(){
-    return view('register');
-})->name('register');
 
 Route::get('/contact', function(){
     return view('contact');

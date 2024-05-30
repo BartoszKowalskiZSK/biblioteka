@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $guarded = [];
-    protected $fillable = ['*'];
+    protected $fillable = ['name', 'email','amount','privillages','password'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -51,13 +51,4 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
-
-    protected static function boot()
-{
-    parent::boot();
-
-    static::creating(function ($user) {
-        $user->amount = 3;
-    });
-}
 }

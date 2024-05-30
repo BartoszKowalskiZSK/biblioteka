@@ -39,7 +39,7 @@ return new class extends Migration
             $table->foreign('book_id')->references('id')->on('books');
             $table->timestamp('rent');
             $table->timestamp('due');
-            $table->completed('completed');
+            $table->boolean('completed');
             $table->boolean('returned');
         });
         
@@ -51,6 +51,8 @@ return new class extends Migration
             $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('time');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
 

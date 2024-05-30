@@ -13,7 +13,7 @@ class Message extends Model
 
     public $timestamps = true;
 
-    protected $table = 'rents';
+    protected $table = 'messages';
 
     public function user()
     {

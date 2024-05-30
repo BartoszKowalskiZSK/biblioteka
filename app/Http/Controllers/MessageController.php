@@ -31,7 +31,7 @@ class MessageController extends Controller
 
         $message->save();
 
-        return redirect()->back()->flash('success','Wiadomość została przesłana pomyślnie!');
+        return redirect()->back()->with('success','Wiadomość została przesłana pomyślnie!');
     }
 
     public function readToday()
