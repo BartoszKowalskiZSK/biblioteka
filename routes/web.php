@@ -28,7 +28,9 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-
+Route::get('/menu', function () {
+    return view('menu');
+})->name('menu');
 
 Route::get('/welcome', function(){
     return view('welcome');
