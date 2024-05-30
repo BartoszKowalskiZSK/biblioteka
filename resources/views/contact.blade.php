@@ -16,25 +16,26 @@
                         @csrf
 
                         <div class="mb-4">
-                            <label for="name" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
-                                {{ __('Imię i nazwisko') }}
-                            </label>
-                            <input type="text" id="name" name="name" class="block w-full pl-10 text-sm text-gray-900 dark:text-black-300">
-                        </div>
-
                         <div class="mb-4">
-                            <label for="email" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
-                                {{ __('Adres e-mail') }}
-                            </label>
-                            <input type="email" id="email" name="email" class="block w-full pl-10 text-sm text-gray-900 dark:text-black-300">
-                        </div>
+    <label for="topic" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+        {{ __('Temat') }}
+    </label>
+    <input type="text" id="topic" name="topic" class="block w-full pl-10 text-sm text-gray-900 dark:text-black-300">
+</div>
 
-                        <div class="mb-4">
-                            <label for="message" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
-                                {{ __('Wiadomość') }}
-                            </label>
-                            <textarea id="message" name="message" class="block w-full pl-10 text-sm text-gray-900 dark:text-black-300"></textarea>
-                        </div>
+<div class="mb-4">
+    <label for="email" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+        {{ __('Email') }}
+    </label>
+    <input type="email" id="email" name="email" class="block w-full pl-10 text-sm text-gray-900 dark:text-black-300">
+</div>
+
+<div class="mb-4">
+    <label for="description" class="block text-sm font-medium text-gray-900 dark:text-gray-300">
+        {{ __('Treść wiadomości') }}
+    </label>
+    <textarea id="description" name="description" class="block w-full pl-10 text-sm text-gray-900 dark:text-black-300"></textarea>
+</div>
 
                         <button type="submit" class="inline-flex items-center px-4 py-2 bg-orange-500 hover:bg-orange-700 text-white font-semibold border border-transparent rounded-md shadow-sm">
                             {{ __('Wyślij wiadomość') }}
