@@ -31,7 +31,7 @@ class BookController extends Controller
         $book->amount = $request->input('amount');
         $book->save();
 
-        return redirect()->back()->flash('success', 'Książka dodana pomyślnie!');
+        return redirect()->back()->with('success', 'Książka dodana pomyślnie!');
     }
 
     public function update(Request $request, $id)
@@ -106,6 +106,13 @@ class BookController extends Controller
         return view('books')->with('books', $notRentedBooks);
     }
 
+    public function readAll()
+    {
+        $books = Book::all();
+        
+        return view('books')->with('books', $books);
+    }
+
     public function delete($id)
     {
         try {
@@ -115,7 +122,7 @@ class BookController extends Controller
             return redirect()->back()->flash('error', 'Nie znaleziono książki o podanym ID')->withInput();
         }
 
-        return redirect()->back()->flash('success', 'Książka usunięta pomyślnie!');
+        return redirect()->back()->with('success', 'Książka usunięta pomyślnie!');
     }
 
 

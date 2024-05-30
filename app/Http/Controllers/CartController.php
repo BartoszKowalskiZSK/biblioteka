@@ -46,7 +46,10 @@ class CartController extends Controller
         $cart['amount']--;
         $request->session()->put('cart',$cart);
         $book = app(BookController::class)->search($productId);
-        return redirect()->back()->flash('success',"Książka ". $book->name." została usunięta z koszyka");
+        if(count($cart)==0){
+            $request->session()->forget('cart');
+        }
+        return redirect()->back()->with('success',"Książka ". $book->name." została usunięta z koszyka");
     }
 
     public function showCart(Request $request){
@@ -55,13 +58,9 @@ class CartController extends Controller
         foreach(array_keys($cart) as $book){
             $books[]= Book::find($book);
         }
-        return redirect()->back()->flash('success',$books);
+        return redirect()->back()->with('success',$books);
     }
 
-    public function deleteCart(Request $request){
-        $request->session()->forget('cart');
-        return redirect()->back()->flash('success','Koszyk został wyczyszczony');
-    }
 
     public function rent(Request $request){
         $cart = $request->session()->get('cart');
@@ -74,6 +73,6 @@ class CartController extends Controller
         $user->amount=$count;
         $user->save();
         $request->session()->forget('cart');
-        return redirect()->back()->flash('success','Książki zostały wypożyczone');
+        return view('cart')->with('success','Książki zostały wypożyczone');
     }
 }

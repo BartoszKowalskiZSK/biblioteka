@@ -20,7 +20,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
         ]);
 
         if($validatedData->fails()){
-            return redirect()->back()->flash('error', $validatedData->errors())->withInput();
+            return redirect()->back()->with('error', $validatedData->errors())->withInput();
         }
 
         $author = new Author;
@@ -28,7 +28,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
         $author->surname = $request->input('surname');
         $author->save();
         $request->reset();
-        return redirect()->back()->flash('success', 'Autor dodany pomyślnie!');
+        return redirect()->back()->with('success', 'Autor dodany pomyślnie!');
     }
 
     public function update(Request $request, $id)
@@ -62,9 +62,15 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
             $author = Author::findOrFail($id);
             $author->delete();
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->flash('error', 'Nie znaleziono autora o podanym id!')->withInput();
+            return redirect()->back()->with('error', 'Nie znaleziono autora o podanym id!')->withInput();
         }
-        return redirect()->back()->flash('success', 'Autor usunięty pomyślnie!');
+        return redirect()->back()->with('success', 'Autor usunięty pomyślnie!');
+    }
+
+    public function read()
+    {
+        $authors = Author::All();
+        return view('authors')->with('authors', $authors);
     }
 
 }

@@ -49,7 +49,7 @@ class RentController extends Controller
         $rent = Rent::find($rentId);
         $rent->ended=true;;
         $rent->save();
-        return redirect()->back()->flash('success','Wypożyczenie zostało usunięte');
+        return redirect()->back()->with('success','Wypożyczenie zostało usunięte');
     }
 
     public function actualRents(){
@@ -58,10 +58,21 @@ class RentController extends Controller
 
     $unexpiredRents = Rent::where('user_id', $currentUser->id)
         ->where('return_date', '>', $currentTime)
+        ->where('returned','!=', true)
         ->get();
 
         return view('allrents')->with('success', $unexpiredRents);
     }
+
+    public function actualRentsAll(){
+        $currentTime = now();
+    
+        $unexpiredRents = Rent::where('return_date', '>', $currentTime)
+            ->where('returned','!=', true)
+            ->get();
+    
+            return view('allrents')->with('success', $unexpiredRents);
+        }
 
 
 

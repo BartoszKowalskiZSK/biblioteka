@@ -14,12 +14,16 @@ class Privillages
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, ...$privillages)
-{
-    if (!in_array(Auth::user()->privillages, $privillages)) {
+    public function handle(Request $request, Closure $next,...$privillages)
+    {
+        $userPrivillages = Auth::user()->privillages;
+
+        foreach ($privillages as $privillage) {
+            if ($userPrivillages >= $privillage) {
+                return $next($request);
+            }
+        }
+
         abort(403);
     }
-
-    return $next($request);
-}
 }
