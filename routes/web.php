@@ -39,13 +39,13 @@ Route::get('/contact', function(){
     return view('contact');
 })->name('contact');
 
-Route::get('/books', function(){
-    return view('books');
-})->name('books');
+
+Route::get('/books/{bookId}', [BookController::class, 'book'])->name('book.page');
+Route::get('/books', [BookController::class, 'read'])->name('books.read');
 
 //MESSAGE CR
 Route::post('/store-message', [MessageController::class, 'store'])->name('message.store');
-Route::get('/today', [MessageController::class, 'readToday'])->name('message.read.today');
+
 
 //User
 Route::middleware(['auth','privillages:1'])->group(function()
@@ -63,7 +63,7 @@ Route::middleware(['auth','privillages:1'])->group(function()
 Route::middleware(['auth','privillages:5'])->group(function()
 {
     //Book CRUD
-    Route::get('/books', [BookController::class, 'read'])->name('books.read');
+    
     Route::get('/store-book', function(){
         return view('book-add');
     });
@@ -85,6 +85,8 @@ Route::middleware(['auth','privillages:5'])->group(function()
     Route::get('/messages/delete/{messageID}', [MessageController::class, 'delete'])->name('message.delete');
 });
 
+
+//WORKER-ADMIN
 Route::middleware(['auth','privillages:10'])->group(function(){
    Route::get('/users', [UserController::class, 'read']);
    Route::get('/users/set1/{userId}', [UserController::class, 'set1']); 

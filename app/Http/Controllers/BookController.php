@@ -125,6 +125,11 @@ class BookController extends Controller
         return redirect()->back()->with('success', 'Książka usunięta pomyślnie!');
     }
 
+    public function book(Request $request, $bookId){
+        $book = Book::where('id','==',$bookId);
+        return view('book')->with('success', $book);
+    }
+
 
 }
 
