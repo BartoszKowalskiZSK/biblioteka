@@ -36,7 +36,7 @@ class CartController extends Controller
             $cart["amount"]--;
             $request->session()->put('cart',$cart);
             $book = app(BookController::class)->search($productId);
-            return redirect()->back()->flash('success', "Książka ". $book->name." została dodana do koszyka");
+            return view('cart')->with('success', "Książka ". $book->name." została dodana do koszyka");
         }
     }
 
@@ -73,6 +73,7 @@ class CartController extends Controller
         $user = User::where('id', $user_id)->first();
         $user->amount=$count;
         $user->save();
+        $request->session()->forget('cart');
         return redirect()->back()->flash('success','Książki zostały wypożyczone');
     }
 }

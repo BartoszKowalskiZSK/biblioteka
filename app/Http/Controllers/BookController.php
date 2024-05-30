@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Rent;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -88,15 +89,21 @@ class BookController extends Controller
         return redirect()->back()->flash('success', 'Książka zaktualizowana pomyślnie!');
     }
 
-    public function read($id)
+    public function read()
     {
-        try {
-            $book = Book::findOrFail($id);
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->flash('error', 'Nie znaleziono książki o podanym ID')->withInput();
-        }
+        $books = Book::all();
+        $notRentedBooks = [];
 
-        return view('book.read', ['book' => $book]);
+        foreach ($books as $book) {
+            $isRented = Rent::where('book_id', $book->id)
+                ->where('returned', false)
+                ->exists();
+
+            if (!$isRented) {
+                $notRentedBooks[] = $book;
+            }
+        }
+        return view('books')->with('books', $notRentedBooks);
     }
 
     public function delete($id)

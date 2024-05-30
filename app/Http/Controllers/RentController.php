@@ -60,7 +60,7 @@ class RentController extends Controller
         ->where('return_date', '>', $currentTime)
         ->get();
 
-        return redirect()->back()->with('success', $unexpiredRents);
+        return view('allrents')->with('success', $unexpiredRents);
     }
 
 
