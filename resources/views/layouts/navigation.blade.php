@@ -4,26 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                @auth
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('your-books') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('your-books')" :active="request()->routeIs('your-books')">
-                        {{ __('Twoje książki') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('rent-books')" :active="request()->routeIs('rent-books')">
-               <!--         {{ __('Książki') }} -->
-                    </x-nav-link>
-                </div>
-                @endauth 
+                
                 <!-- GUEST -->
                 @guest
                 <div class="shrink-0 flex items-center">

@@ -16,6 +16,9 @@ class Privillages
      */
     public function handle(Request $request, Closure $next,...$privillages)
     {
+        if (!Auth::check()) {
+            return redirect()->route('login');
+        }
         $userPrivillages = Auth::user()->privillages;
 
         foreach ($privillages as $privillage) {
