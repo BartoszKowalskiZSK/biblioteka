@@ -15,7 +15,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         @foreach($books as $book)
-                            <div class="bg-orange-400 h-64 w-full p-4 rounded-lg shadow-md relative">
+                            <div class="bg-slate-700 h-64 w-full p-4 rounded-lg shadow-md relative">
                                 @if ($book['image'])
                                     <img src="{{ asset('img/'. $book['image']) }}" alt="{{ $book['name'] }}" class="w-full h-48 object-cover rounded-t-lg mb-2">
                                 @endif
@@ -33,7 +33,7 @@
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             @foreach($books as $book)
-                                <div class="bg-orange-400 h-64 w-full p-4 rounded-lg shadow-md relative">
+                                <div class="bg-slate-700 h-64 w-full p-4 rounded-lg shadow-md relative">
                                     @if ($book['image'])
                                         <img src="{{ asset('img/'. $book['image']) }}" alt="{{ $book['name'] }}" class="w-full h-48 object-cover rounded-t-lg mb-2">
                                     @endif
@@ -52,7 +52,7 @@
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                             @foreach($books as $book)
-                                <div class="bg-orange-400 h-64 w-full p-4 rounded-lg shadow-md relative">
+                                <div class="bg-slate-700 h-64 w-full p-4 rounded-lg shadow-md relative">
                                     @if ($book['image'])
                                         <img src="{{ asset('img/'. $book['image']) }}" alt="{{ $book['name'] }}" class="w-full h-48 object-cover rounded-t-lg mb-2">
                                     @endif
