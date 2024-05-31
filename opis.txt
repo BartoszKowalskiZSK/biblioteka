@@ -49,3 +49,9 @@ Możliwość prolongowania wypożyczeń książek
 Podsumowanie:
 
 Zaktualizowany projekt biblioteki online z wykorzystaniem Dockera i Laravela to ambitny projekt, który ma na celu stworzenie funkcjonalnej i łatwej w użyciu aplikacji dla użytkowników. Wykorzystanie nowoczesnych technologii zapewnia skalowalność i łatwość utrzymania aplikacji.
+
+---------------------------------------------------------------------
+
+Aby prawidłowo uruchomić projekt należy doinstalować laravel/breeze oraz riverskies/laravel-mobile-detect
+Należy także załączyć bazę danych za pomocą : 
+./vendor/bin/sail php artisan db:seed 
