@@ -51,7 +51,9 @@ Route::get('/add-book', function(){
     return view('add-book');
 })->name('add-book');
 
-
+Route::get('/your-books', function(){
+    return view('your-books');
+})->name('your-books');
 
 
 Route::get('/books/{bookId}', [BookController::class, 'book'])->name('book.page');

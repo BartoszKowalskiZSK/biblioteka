@@ -11,7 +11,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    <form method="POST" action="{{ route('books.create') }}">
+                    <form method="POST" action="/books/create">
                         @csrf
 
                         <div class="mb-6">
@@ -59,9 +59,7 @@
                             </label>
                             <select name="author_id" id="author_id" class="border border-gray-400 p-2 w-full text-black @error('author_id') border-red-500 @enderror" required>
                                 <option value="">Wybierz autora</option>
-                                @foreach ($authors as $author)
-                                    <option value="{{ $author->id }}" @if (old('author_id') == $author->id) selected @endif>{{ $author->name }} {{ $author->surname }}</option>
-                                @endforeach
+                                <!-- Tu normalnie wpisz opcje ręcznie lub z innej zmiennej, jeśli dostępna -->
                             </select>
 
                             @error('author_id')
