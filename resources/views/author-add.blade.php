@@ -18,7 +18,7 @@
                             <label for="name" class="block mb-2 uppercase font-bold text-xs text-gray-700 dark:text-gray-400">
                                 Imię
                             </label>
-                            <input type="text" name="name" id="name" class="border border-gray-400 p-2 w-full @error('name') border-red-500 @enderror" value="{{ old('name') }}" required autofocus>
+                            <input type="text" name="name" id="name" class="border border-gray-400 p-2 w-full text-black @error('name') border-red-500 @enderror" value="{{ old('name') }}" required autofocus>
 
                             @error('name')
                                 <p class="text-red-500 text-xs italic mt-2">
@@ -31,7 +31,7 @@
                             <label for="surname" class="block mb-2 uppercase font-bold text-xs text-gray-700 dark:text-gray-400">
                                 Nazwisko
                             </label>
-                            <input type="text" name="surname" id="surname" class="border border-gray-400 p-2 w-full @error('surname') border-red-500 @enderror" value="{{ old('surname') }}" required>
+                            <input type="text" name="surname" id="surname" class="border border-gray-400 p-2 w-full text-black @error('surname') border-red-500 @enderror" value="{{ old('surname') }}" required>
 
                             @error('surname')
                                 <p class="text-red-500 text-xs italic mt-2">
@@ -41,8 +41,8 @@
                         </div>
 
                         <div class="mb-6">
-                            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                Dodaj
+                            <button type="submit" class="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                Dodaj autora
                             </button>
                         </div>
                     </form>

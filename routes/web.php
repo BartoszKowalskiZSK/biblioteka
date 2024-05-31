@@ -47,6 +47,9 @@ Route::get('/menu', function () {
     return view('menu');
 })->name('menu');
 
+Route::get('/add-book', function(){
+    return view('add-book');
+})->name('add-book');
 
 
 
