@@ -51,4 +51,14 @@ class User extends Authenticatable
     {
         return $this->hasMany(Message::class);
     }
+
+    
+    public function hasPrivillages($privillages)
+    {
+        // Załóżmy, że kolumna 'privillages' istnieje w tabeli użytkowników
+        return $this->privillages >= $privillages;
+    }
+
+
+
 }

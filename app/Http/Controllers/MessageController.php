@@ -34,23 +34,10 @@ class MessageController extends Controller
         return redirect()->back()->with('success','Wiadomość została przesłana pomyślnie!');
     }
 
-    public function readToday()
-    {
-        try {
-            $message = Message::whereDate('time', now()->toDateString())->get();
-        } catch (ModelNotFoundException $e) {
-            return redirect()->back()->flash('error','Nie znaleziono wiadomości o podanym ID');
-        }
-        if(empty($message)){
-            redirect()->back()->flash('blank','Nie znaleziono wiadomości z dzisiaj');
-        }
-        return view('messages')->with('message' , $message)->with('today','today');
-    }
-
     public function readAll()
     {
         try {
-            $message = Message::all();
+            $message = Message::orderBy('id', 'desc')->get();
         } catch (ModelNotFoundException $e) {
             return redirect()->back()->flash('error','Nie znaleziono wiadomości o podanym ID');
         }

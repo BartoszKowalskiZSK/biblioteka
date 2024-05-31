@@ -10,7 +10,18 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class InfoController extends Controller
 {
     public function read(){
-        $info = Info::first();
+        try{
+            $info = Info::firstorFail();
+        }  catch(ModelNotFoundException $e){
+            $info = new info;
+            $info->nrtel = null;
+            $info->email = null;
+            $info->adres = null;
+            $info->otwarcienormal = null;
+            $info->otwarcieweekend = null;
+            $info->user_id=null;
+            $info->save();
+        }
         return view('welcome')->with('info', $info);
     }
 
@@ -29,7 +40,7 @@ class InfoController extends Controller
             $info->user_id=Auth()->user()->id;
             $info->save();
         }
-        if($info->fail)
+       
         $info->user_id=Auth()->user()->id;
         $nn=false;
         if($request->input('nrtel')){
@@ -69,5 +80,6 @@ class InfoController extends Controller
 
         $info->user_id=Auth()->user()->id;
         $info->save();
+        return redirect()->route('/');
     }
 }

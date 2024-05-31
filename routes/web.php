@@ -9,6 +9,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\InfoController;
 use App\Models\Book;
 
 Route::get('/', function () {
@@ -30,9 +31,9 @@ require __DIR__.'/auth.php';
 
 
 
-Route::get('/welcome', function(){
-    return view('welcome');
-})->name('welcome');
+
+
+
 
 
 Route::get('/contact', function(){
@@ -51,6 +52,9 @@ Route::get('/add-book', function(){
     return view('add-book');
 })->name('add-book');
 
+Route::get('/', [InfoController::class, 'read'])->name('welcome');
+Route::post('/admin/info/edit', [InfoController::class, 'edit'])->name('info.edit');
+Route::post('/edit', [InfoController::class, 'edit'])->name('info.edit');
 
 
 
