@@ -1,5 +1,7 @@
 Projekt biblioteki z wykorzystaniem Dockera i Laravela
 
+HOUR COUNTER
+Przy 60 przestaliśmy liczyć, ale biorąc pod uwagę liczbe dni i średnią ilość godzin to końcowo wyszło ~125-150
 
 Opis:
 
