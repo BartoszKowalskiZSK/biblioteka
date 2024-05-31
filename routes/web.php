@@ -48,6 +48,9 @@ Route::get('/menu', function () {
 })->name('menu');
 
 
+
+
+
 Route::get('/books/{bookId}', [BookController::class, 'book'])->name('book.page');
 Route::get('/books', [BookController::class, 'read'])->name('books.read');
 
@@ -84,7 +87,7 @@ Route::middleware(['auth','privillages:1'])->group(function()
     Route::get('/authors/add', function(){
         return view('author-add');
     });
-    Route::post('/authors/add', [AuthorController::class, 'store'])->name('author.store');
+    Route::post('/authors/add', [AuthorController::class, 'store'])->name('authors.store');
     //Rent CRUD
     Route::get('/rents', [RentController::class, 'actualRentsAll'])->name('rents.all');
     Route::get('/rents/delete/{rentID}', [RentController::class, 'softDelete'])->name('rents.delete');

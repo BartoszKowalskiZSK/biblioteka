@@ -3,32 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
-
-use Illuminate\Http\Request;
 use App\Models\Author;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-    class AuthorController extends Controller
+class AuthorController extends Controller
+{
+    public function store(Request $request)
     {
-        public function store(Request $request)
-    {
-        $validatedData = Validator::make($request->all(),[
+        $validatedData = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
         ]);
 
-        if($validatedData->fails()){
-            return redirect()->back()->with('error', $validatedData->errors())->withInput();
+        if ($validatedData->fails()) {
+            return redirect()->back()->withErrors($validatedData)->withInput();
         }
 
-        $author = new Author;
+        $author = new Author();
         $author->name = $request->input('name');
         $author->surname = $request->input('surname');
         $author->save();
-        $request->reset();
-        return redirect()->back()->with('success', 'Autor dodany pomyślnie!');
+
+        return redirect()->back()->with('success', 'Autor został pomyślnie dodany.');
     }
 
     public function update(Request $request, $id)
@@ -41,7 +39,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
         ]);
 
         if ($validatedData->fails()) {
-            return redirect()->back()->flash('error', $validatedData->errors())->withInput();
+            return redirect()->back()->with('error', $validatedData->errors())->withInput();
         }
 
         if ($request->has('name')) {
@@ -53,7 +51,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
         }
 
         $author->save();
-        return redirect()->back()->flash('success', 'Autor zaktualizowany pomyślnie!');
+        return redirect()->back()->with('success', 'Autor zaktualizowany pomyślnie!');
     }
 
     public function delete($id)
@@ -69,8 +67,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 
     public function read()
     {
-        $authors = Author::All();
-        return view('authors')->with('authors', $authors);
+        $authors = Author::all();
+        return view('authors', compact('authors'));
     }
-
 }

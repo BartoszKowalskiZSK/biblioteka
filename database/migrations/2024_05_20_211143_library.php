@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('surname');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
 
 
@@ -32,7 +34,7 @@ return new class extends Migration
 
         Schema::create('rents', function (Blueprint $table){
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('user_id'); // Ensure this is unsignedBigInteger
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('book_id');
             $table->foreign('book_id')->references('id')->on('books');
@@ -40,6 +42,8 @@ return new class extends Migration
             $table->timestamp('due');
             $table->boolean('completed');
             $table->boolean('returned');
+            $table->timestamp('created_at')->nullable();
+            $table->timestamp('updated_at')->nullable();
         });
         
         Schema::create('messages', function(Blueprint $table){
