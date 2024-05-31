@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Info;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class InfoController extends Controller
 {
@@ -15,7 +16,21 @@ class InfoController extends Controller
 
     public function edit(Request $request){
         //['user_id','nrtel','email','adres','otwarcienormal','otwarcieweekend']
-        $info = Info::find(1);
+        try {
+            $info = Info::findOrFail(1);
+        } catch (ModelNotFoundException $e) {
+            // tutaj obsłuż wyjątek, np. zwróć komunikat o błędzie
+            $info = new info;
+            $info->nrtel = $request->input('nrtel');
+            $info->email = $request->input('email');
+            $info->adres = $request->input('adres');
+            $info->otwarcienormal = $request->input('otwarcienormal');
+            $info->otwarcieweekend = $request->input('otwarcieweekend');
+            $info->user_id=Auth()->user()->id;
+            $info->save();
+        }
+        if($info->fail)
+        $info->user_id=Auth()->user()->id;
         $nn=false;
         if($request->input('nrtel')){
             $info->nrtel = $request->input('nrtel');
