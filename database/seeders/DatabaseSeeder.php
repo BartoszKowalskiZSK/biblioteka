@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call(NasienieAutorzy::class);
         $this->call(NasienieBooks::class);
         $this->call(UsersTableSeeder::class); // Dodane
+        $this->call(InfoSeeder::class);
 
         // User::factory(10)->create();
 

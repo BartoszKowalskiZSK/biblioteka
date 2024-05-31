@@ -57,6 +57,17 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
+
+        Schema::create('info', function(Blueprint $table){
+            $table->increments('id');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->string('nrtel');
+            $table->string('adres');
+            $table->string('email');
+            $table->string('otwarcienormal');
+            $table->string('otwarcieweekend');
+        });
     }
 
     /**
@@ -68,5 +79,6 @@ return new class extends Migration
         Schema::dropIfExists('rents');
         Schema::dropIfExists('books');
         Schema::dropIfExists('authors');
+        Schema::dropIfExists('info');
     }
 };

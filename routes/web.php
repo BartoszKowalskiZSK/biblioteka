@@ -6,14 +6,13 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RentController;
 use App\Http\Controllers\UserController;
 use App\Models\Book;
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [InfoController::class, 'read'])->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,10 +28,6 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
-
-Route::get('/welcome', function(){
-    return view('welcome');
-})->name('welcome');
 
 
 Route::get('/contact', function(){
@@ -105,4 +100,5 @@ Route::middleware(['auth','privillages:1'])->group(function(){
    Route::get('/users/set1/{userId}', [UserController::class, 'set1']); 
    Route::get('/users/set5/{userId}', [UserController::class, 'set5']); 
    Route::get('/users/set10/{userId}', [UserController::class, 'set10']); 
+   Route::post('/edit', [InfoController::class, 'edit'])->name('index.edit');
 });
