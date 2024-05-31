@@ -43,6 +43,10 @@ Route::get('/author-add', function(){
     return view('author-add');
 })->name('author-add');
 
+Route::get('/menu', function () {
+    return view('menu');
+})->name('menu');
+
 
 Route::get('/books/{bookId}', [BookController::class, 'book'])->name('book.page');
 Route::get('/books', [BookController::class, 'read'])->name('books.read');

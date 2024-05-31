@@ -12,18 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('authors', function(Blueprint $table){
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->string('surname');
         });
 
 
         Schema::create('books', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('name');
             $table->text('description');
             $table->string('ISBN')->unique();
-            $table->unsignedInteger('author_id');
+            $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('authors');
             $table->integer('amount');
             $table->timestamp('added')->nullable();
@@ -31,10 +31,10 @@ return new class extends Migration
         });
 
         Schema::create('rents', function (Blueprint $table){
-            $table->increments('id');
-            $table->unsignedInteger('user_id');
+            $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->unsignedInteger('book_id');
+            $table->unsignedBigInteger('book_id');
             $table->foreign('book_id')->references('id')->on('books');
             $table->timestamp('rent');
             $table->timestamp('due');
@@ -43,11 +43,11 @@ return new class extends Migration
         });
         
         Schema::create('messages', function(Blueprint $table){
-            $table->increments('id');
+            $table->id();
             $table->string('topic');
             $table->text('description');
             $table->string('email');
-            $table->unsignedInteger('user_id')->nullable();
+            $table->unsignedBigInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamp('time');
             $table->timestamp('created_at')->nullable();
