@@ -56,6 +56,9 @@ Route::get('/', [InfoController::class, 'read'])->name('welcome');
 Route::post('/admin/info/edit', [InfoController::class, 'edit'])->name('info.edit');
 Route::post('/edit', [InfoController::class, 'edit'])->name('info.edit');
 
+Route::get('/your-books', function(){
+    return view('your-books');
+})->name('your-books');
 
 
 Route::get('/books/{bookId}', [BookController::class, 'book'])->name('book.page');

@@ -3,8 +3,30 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
-                <!-- Logo -->
-                
+                 <!-- Logo -->
+                 @if(Auth::check() && Auth::user()->hasPrivillages(1))
+
+                 <div class="shrink-0 flex items-center">
+                    <a href="{{ route('dashboard') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('rents.read')" :active="request()->routeIs('rents.read')">
+                        {{ __('Twoje książki') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Informacje') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                        {{ __('Kontakt') }}
+                    </x-nav-link>
+                    
+                </div>
+                @endif
+            
                 <!-- GUEST -->
                 @guest
                 <div class="shrink-0 flex items-center">
