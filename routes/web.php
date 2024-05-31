@@ -28,9 +28,7 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('/menu', function () {
-    return view('menu');
-})->name('menu');
+
 
 Route::get('/welcome', function(){
     return view('welcome');
@@ -40,6 +38,10 @@ Route::get('/welcome', function(){
 Route::get('/contact', function(){
     return view('contact');
 })->name('contact');
+
+Route::get('/author-add', function(){
+    return view('author-add');
+})->name('author-add');
 
 
 Route::get('/books/{bookId}', [BookController::class, 'book'])->name('book.page');
@@ -62,7 +64,8 @@ Route::middleware(['auth','privillages:1'])->group(function()
 });
 
 //Worker
-Route::middleware(['auth','privillages:5'])->group(function()
+Route::middleware(['auth','privillages:1'])->group(function()
+//zmienic pozniej na 5
 {
     //Book CRUD
     
@@ -72,7 +75,7 @@ Route::middleware(['auth','privillages:5'])->group(function()
 
     Route::post('/store-book', [BookController::class, 'store'])->name('book.store');
     //Authors CRUD
-    Route::get('/authors', [RentController::class, 'read'])->name('authors.all');
+    Route::get('/authors', [AuthorController::class, 'read'])->name('authors.all');
     Route::get('/authors/delete/{authorID}', [AuthorController::class, 'delete'])->name('delete.author');
     Route::get('/authors/add', function(){
         return view('author-add');
@@ -89,7 +92,8 @@ Route::middleware(['auth','privillages:5'])->group(function()
 
 
 //WORKER-ADMIN
-Route::middleware(['auth','privillages:10'])->group(function(){
+Route::middleware(['auth','privillages:1'])->group(function(){
+    //zmienic priv na 10 pozniej
    Route::get('/users', [UserController::class, 'read']);
    Route::get('/users/set1/{userId}', [UserController::class, 'set1']); 
    Route::get('/users/set5/{userId}', [UserController::class, 'set5']); 

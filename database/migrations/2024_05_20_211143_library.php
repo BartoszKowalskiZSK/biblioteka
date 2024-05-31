@@ -11,7 +11,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-
         Schema::create('authors', function(Blueprint $table){
             $table->increments('id');
             $table->string('name');
@@ -54,10 +53,6 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
-
-
-
-
     }
 
     /**
@@ -65,9 +60,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('books');
-        Schema::dropIfExists('rents');
-        Schema::dropIfExists('authors');
         Schema::dropIfExists('messages');
+        Schema::dropIfExists('rents');
+        Schema::dropIfExists('books');
+        Schema::dropIfExists('authors');
     }
 };
