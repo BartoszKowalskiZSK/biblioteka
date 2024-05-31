@@ -4,6 +4,8 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                  <!-- Logo -->
+                 @if(Auth::check() && Auth::user()->hasPrivillages(1))
+
                  <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
@@ -23,8 +25,8 @@
                     </x-nav-link>
                     
                 </div>
-
-               
+                @endif
+            
                 <!-- GUEST -->
                 @guest
                 <div class="shrink-0 flex items-center">
