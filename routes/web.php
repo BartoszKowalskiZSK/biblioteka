@@ -48,9 +48,7 @@ Route::get('/menu', function () {
     return view('menu');
 })->name('menu');
 
-Route::get('/add-book', function(){
-    return view('add-book');
-})->name('add-book');
+
 
 Route::get('/', [InfoController::class, 'read'])->name('welcome');
 Route::post('/admin/info/edit', [InfoController::class, 'edit'])->name('info.edit');
@@ -72,25 +70,23 @@ Route::post('/store-message', [MessageController::class, 'store'])->name('messag
 Route::middleware(['auth','privillages:1'])->group(function()
 {
     //CART CRUD
-    Route::get('/cart', [CartController::class, 'showCart'])->name('cart.show');
-    Route::get('/add/{productId}', [RentController::class, 'addToCart'])->name('cart.add');
-    Route::get('/remove/{productId}', [RentController::class, 'removeFromCart'])->name('cart.remove');
-    Route::get('/cart/rent', [RentController::class, 'rent'])->name('cart.rent');
+    Route::get('/cart', [CartController::class, 'showCart'])->name('cart');
+    Route::get('/add/{productId}', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::get('/remove/{productId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
+    Route::post('/rent', [CartController::class, 'rent'])->name('cart.rent');
     //Rents
     Route::get('/your-books', [RentController::class, 'actualRents'])->name('rents.read');
 });
 
 //Worker
-Route::middleware(['auth','privillages:1'])->group(function()
+Route::middleware(['auth','privillages:5'])->group(function()
 //zmienic pozniej na 5
 {
     //Book CRUD
     
-    Route::get('/store-book', function(){
-        return view('book-add');
-    });
+    Route::get('/store-book', [BookController::class, 'add'])->name('book.add');
+    Route::post('/books/create', [BookController::class, 'store'])->name('book.store');
 
-    Route::post('/store-book', [BookController::class, 'store'])->name('book.store');
     //Authors CRUD
     Route::get('/authors', [AuthorController::class, 'read'])->name('authors.all');
     Route::get('/authors/delete/{authorID}', [AuthorController::class, 'delete'])->name('delete.author');
@@ -103,13 +99,12 @@ Route::middleware(['auth','privillages:1'])->group(function()
     Route::get('/rents/delete/{rentID}', [RentController::class, 'softDelete'])->name('rents.delete');
     //Messages RD
     Route::get('/messages/all', [MessageController::class, 'readAll'])->name('message.read.all');
-    Route::get('/messages/today', [MessageController::class, 'readToday'])->name('message.read.today');
     Route::get('/messages/delete/{messageID}', [MessageController::class, 'delete'])->name('message.delete');
 });
 
 
 //WORKER-ADMIN
-Route::middleware(['auth','privillages:1'])->group(function(){
+Route::middleware(['auth','privillages:10'])->group(function(){
     //zmienic priv na 10 pozniej
    Route::get('/users', [UserController::class, 'read']);
    Route::get('/users/set1/{userId}', [UserController::class, 'set1']); 

@@ -68,11 +68,11 @@ class RentController extends Controller
     public function actualRentsAll(){
         $currentTime = now();
     
-        $unexpiredRents = Rent::where('return_date', '>', $currentTime)
+        $unexpiredRents = Rent::where('due', '>', $currentTime)
             ->where('returned','!=', true)
             ->get();
     
-            return view('allrents')->with('success', $unexpiredRents);
+            return view('your-books')->with('success', $unexpiredRents);
         }
 
 

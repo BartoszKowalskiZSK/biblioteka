@@ -40,6 +40,17 @@ class UsersTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
+            [
+                'name' => 'Worker user',
+                'email' => 'worker@example.com',
+                'email_verified_at' => Carbon::now(),
+                'password' => Hash::make('password'),
+                'privillages' => '5', // Zmiana na ciąg znaków
+                'amount' => 3,
+                'remember_token' => Str::random(10),
+                'created_at' => Carbon::now(),
+                'updated_at' => Carbon::now(),
+            ]
         ]);
     }
 }

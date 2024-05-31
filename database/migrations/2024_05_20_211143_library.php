@@ -27,7 +27,6 @@ return new class extends Migration
             $table->string('ISBN')->unique();
             $table->unsignedBigInteger('author_id');
             $table->foreign('author_id')->references('id')->on('authors');
-            $table->integer('amount');
             $table->timestamp('added')->nullable();
             $table->timestamps();
         });

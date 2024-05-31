@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Author;
 use App\Models\Rent;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -15,20 +16,18 @@ class BookController extends Controller
         $validatedData = Validator::make($request->all(), [
             'name'=>'required|string|max:255',
             'description'=>'required|string|max:1000',
-            'ISBN'=>'required|unique::books,ISBN|string|max:13',
+            'ISBN'=>'required|string|max:13',
             'author'=>'required|integer|exists:authors,id',
-            'amount'=>'required|integer'
         ]);
 
         if($validatedData->fails()){
-            return redirect()->back()->flash('error',$validatedData->errors())->withInput();
+            return redirect()->back()->with('error',$validatedData->errors())->withInput();
         }
         $book = new Book;
         $book->name = $request->input('name');
         $book->description = $request->input('description');
         $book->ISBN = $request->input('ISBN');
-        $book->author_id = $request->input('author_id');
-        $book->amount = $request->input('amount');
+        $book->author_id = $request->input('author');
         $book->save();
 
         return redirect()->back()->with('success', 'Książka dodana pomyślnie!');
@@ -45,9 +44,8 @@ class BookController extends Controller
         $validatedData = Validator::make($request->all(), [
             'name' => 'sometimes|required|string|max:255',
             'description' => 'sometimes|required|string|max:1000',
-            'ISBN' => 'sometimes|required|unique:books,ISBN,' . $id . '|string|max:13',
+            'ISBN' => 'sometimes|required|unique:books,ISBN,'.$id .'|string|max:13',
             'author_id' => 'sometimes|required|integer|exists:authors,id',
-            'amount' => 'sometimes|required|integer'
         ]);
 
         if ($validatedData->fails()) {
@@ -80,10 +78,6 @@ class BookController extends Controller
             $hasChanged = true;
         }
 
-        if (!$hasChanged) {
-            return redirect()->back()->flash('success', 'Brak zmian do zapisania');
-        }
-
         $book->save();
 
         return redirect()->back()->flash('success', 'Książka zaktualizowana pomyślnie!');
@@ -113,13 +107,18 @@ class BookController extends Controller
         return view('books')->with('books', $books);
     }
 
+    public function add(){
+        $authors = Author::get();
+        return view('add-book')->with('authors',$authors);
+    }
+
     public function delete($id)
     {
         try {
             $book = Book::findOrFail($id);
             $book->delete();
         } catch (ModelNotFoundException $e) {
-            return redirect()->back()->flash('error', 'Nie znaleziono książki o podanym ID')->withInput();
+            return redirect()->back()->with('error', 'Nie znaleziono książki o podanym ID')->withInput();
         }
 
         return redirect()->back()->with('success', 'Książka usunięta pomyślnie!');

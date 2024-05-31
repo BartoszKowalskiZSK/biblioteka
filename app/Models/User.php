@@ -57,4 +57,10 @@ class User extends Authenticatable
         // Załóżmy, że kolumna 'privillages' istnieje w tabeli użytkowników
         return $this->privillages >= $privillages;
     }
+
+    public function hasPrivillagesOnly($privillages)
+    {
+        // Załóżmy, że kolumna 'privillages' istnieje w tabeli użytkowników
+        return $this->privillages == $privillages;
+    }
 }

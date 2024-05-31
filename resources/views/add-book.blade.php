@@ -54,28 +54,17 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="author_id" class="block mb-2 uppercase font-bold text-xs text-gray-700 dark:text-gray-400">
+                            <label for="author" class="block mb-2 uppercase font-bold text-xs text-gray-700 dark:text-gray-400">
                                 Autor
                             </label>
-                            <select name="author_id" id="author_id" class="border border-gray-400 p-2 w-full text-black @error('author_id') border-red-500 @enderror" required>
-                                <option value="">Wybierz autora</option>
+                            <select name="author" id="author" class="border border-gray-400 p-2 w-full text-black @error('author') border-red-500 @enderror" required>
+                                @foreach ($authors as $author)
+                                    <option value="{{intval($author['id'])}}">{{$author['name']." ".$author['surname']}}</option>
+                                @endforeach
                                 <!-- Tu normalnie wpisz opcje ręcznie lub z innej zmiennej, jeśli dostępna -->
                             </select>
 
-                            @error('author_id')
-                                <p class="text-red-500 text-xs italic mt-2">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                        </div>
-
-                        <div class="mb-6">
-                            <label for="amount" class="block mb-2 uppercase font-bold text-xs text-gray-700 dark:text-gray-400">
-                                Ilość
-                            </label>
-                            <input type="number" name="amount" id="amount" class="border border-gray-400 p-2 w-full text-black @error('amount') border-red-500 @enderror" value="{{ old('amount') }}" required>
-
-                            @error('amount')
+                            @error('author')
                                 <p class="text-red-500 text-xs italic mt-2">
                                     {{ $message }}
                                 </p>

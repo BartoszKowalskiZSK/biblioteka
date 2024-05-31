@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                  <!-- Logo -->
-                 @if(Auth::check() && Auth::user()->hasPrivillages(1))
+                 @if(Auth::check() && Auth::user()->hasPrivillagesOnly(1))
 
                  <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
@@ -22,6 +22,12 @@
                     </x-nav-link>
                     <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
                         {{ __('Kontakt') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('books.read')" :active="request()->routeIs('books.read')">
+                        {{ __('Książki') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('cart')" :active="request()->routeIs('cart')">
+                        {{ __('Koszyk') }}
                     </x-nav-link>
                     
                 </div>
@@ -49,12 +55,89 @@
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('books.read')" :active="request()->routeIs('books.read')">
+                        {{ __('Książki') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('login')" :active="request()->routeIs('contact')">
                         {{ __('Zaloguj') }}
                     </x-nav-link>
                 </div>
                 @endguest
             </div>
+
+            @if(Auth::check() && Auth::user()->hasPrivillagesOnly(5))
+
+                 <div class="shrink-0 flex items-center">
+                    <a href="{{ route('dashboard') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('book.add')" :active="request()->routeIs('book.add')">
+                        {{ __('Dodaj książki') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Informacje') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                        {{ __('Kontakt') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('authors.all')" :active="request()->routeIs('authors.all')">
+                        {{ __('Autorzy') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('message.read.all')" :active="request()->routeIs('message.read.all')">
+                        {{ __('Wiadomości') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('rents.all')" :active="request()->routeIs('rents.all')">
+                        {{ __('Wszystkie wypożyczenia') }}
+                    </x-nav-link>
+                    
+                </div>
+            @endif
+
+
+            @if(Auth::check() && Auth::user()->hasPrivillagesOnly(10))
+
+                 <div class="shrink-0 flex items-center">
+                    <a href="{{ route('dashboard') }}">
+                        <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
+                    </a>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <x-nav-link :href="route('book.add')" :active="request()->routeIs('book.add')">
+                        {{ __('Dodaj książki') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
+                        {{ __('Informacje') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
+                        {{ __('Kontakt') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('authors.all')" :active="request()->routeIs('authors.all')">
+                        {{ __('Autorzy') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('message.read.all')" :active="request()->routeIs('message.read.all')">
+                        {{ __('Wiadomości') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('rents.all')" :active="request()->routeIs('rents.all')">
+                        {{ __('Wszystkie wypożyczenia') }}
+                    </x-nav-link>
+
+
+                    
+                </div>
+            @endif
 
             <!-- Settings Dropdown -->
             @auth
