@@ -113,25 +113,8 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                <x-nav-link :href="route('book.add')" :active="request()->routeIs('book.add')">
-                        {{ __('Dodaj książki') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('welcome')" :active="request()->routeIs('welcome')">
-                        {{ __('Informacje') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('contact')" :active="request()->routeIs('contact')">
-                        {{ __('Kontakt') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('authors.all')" :active="request()->routeIs('authors.all')">
-                        {{ __('Autorzy') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('message.read.all')" :active="request()->routeIs('message.read.all')">
-                        {{ __('Wiadomości') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('rents.all')" :active="request()->routeIs('rents.all')">
-                        {{ __('Wszystkie wypożyczenia') }}
+                <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                        {{ __('Użytkownicy') }}
                     </x-nav-link>
 
 

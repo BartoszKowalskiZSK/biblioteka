@@ -108,8 +108,8 @@ Route::middleware(['auth','privillages:5'])->group(function()
 //WORKER-ADMIN
 Route::middleware(['auth','privillages:10'])->group(function(){
     //zmienic priv na 10 pozniej
-   Route::get('/users', [UserController::class, 'read']);
-   Route::get('/users/set1/{userId}', [UserController::class, 'set1']); 
-   Route::get('/users/set5/{userId}', [UserController::class, 'set5']); 
-   Route::get('/users/set10/{userId}', [UserController::class, 'set10']); 
+   Route::get('/users', [UserController::class, 'readAll'])->name('users');
+   Route::get('/users/set1/{userId}', [UserController::class, 'set1'])->name('set1'); 
+   Route::get('/users/set5/{userId}', [UserController::class, 'set5'])->name('set5'); 
+   Route::get('/users/set10/{userId}', [UserController::class, 'set10'])->name('set10'); 
 });

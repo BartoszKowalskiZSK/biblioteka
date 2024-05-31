@@ -10,7 +10,7 @@ class UserController extends Controller
     public function readAll(){
         if(Auth()->user()->privillages==10){
             $users= User::All();
-            return view('users')->with('users', $users);
+            return view('admin')->with('users', $users);
         }else{
             abort(403);
         }

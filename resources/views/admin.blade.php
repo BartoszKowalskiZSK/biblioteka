@@ -32,16 +32,17 @@
                                                 <div class="flex items-center space-x-2">
                                                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                                                     <div class="flex space-x-2">
-                                                        <button type="submit" name="permission" value="1" class="inline-flex items-center px-4 py-2 bg-blue-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-blue-500 active:bg-blue-700 focus:outline-none focus:border-blue-700 focus:ring focus:ring-blue-200 disabled:opacity-25 transition">
-                                                            1
-                                                        </button>
-                                                        <button type="submit" name="permission" value="5" class="inline-flex items-center px-4 py-2 bg-green-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-green-500 active:bg-green-700 focus:outline-none focus:border-green-700 focus:ring focus:ring-green-200 disabled:opacity-25 transition">
-                                                            5
-                                                        </button>
-                                                        <button type="submit" name="permission" value="10" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-500 active:bg-red-700 focus:outline-none focus:border-red-700 focus:ring focus:ring-red-200 disabled:opacity-25 transition">
-                                                            10
-                                                        </button>
-                                                    </div>
+                                                    <div class="flex space-x-2">
+                                                    <form action="{{ route('set1', $user->id) }}" method="GET">
+                                                        <button type="submit" class="w-5 ml-1">1</button>
+                                                    </form>
+                                                    <form action="{{ route('set5', $user->id) }}" method="GET">
+                                                        <button type="submit" class="w-5 ml-1">5</button>
+                                                    </form>
+                                                    <form action="{{ route('set10', $user->id) }}" method="GET">
+                                                        <button type="submit" class="w-5 ml-1">10</button>
+                                                    </form>
+                                                </div>
                                                 </div>
                                             </td>
                                         </tr>
