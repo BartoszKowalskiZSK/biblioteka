@@ -1,0 +1,49 @@
+Projekt biblioteki z wykorzystaniem Dockera i Laravela
+
+
+Opis:
+
+Celem projektu jest stworzenie funkcjonalnej biblioteki online z wykorzystaniem technologii Docker i frameworka Laravel. Aplikacja ma oferować szereg funkcji, m.in.:
+
+Zarządzanie książkami i autorami:
+Dodawanie nowych książek i autorów
+Edycja istniejących książek i autorów
+Usuwanie książek i autorów
+Koszyk:
+Możliwość dodawania książek do koszyka
+Przeglądanie zawartości koszyka
+Usuwanie książek z koszyka
+Wypożyczanie książek z koszyka (zamiast zamawiania)
+Strony:
+Strona główna z listą dostępnych książek
+Strona z informacjami o bibliotece
+Strona kontaktu z formularzem do zgłaszania problemów
+Autoryzacja:
+Możliwość założenia konta użytkownika
+Logowanie się do konta użytkownika
+Technologia:
+
+Docker: Konteneryzacja aplikacji i środowiska
+Laravel: Framework PHP do tworzenia aplikacji webowych
+Baza danych: Możliwość wykorzystania różnych baz danych, np. MySQL, PostgreSQL
+Funkcjonalność:
+
+Aplikacja będzie dostępna za pomocą przeglądarki internetowej.
+Użytkownicy będą mogli przeglądać listę dostępnych książek, filtrować je po różnych kryteriach (np. autor, tytuł, gatunek) i dodawać je do koszyka.
+Będzie można wypożyczać książki z koszyka, a system wygeneruje potwierdzenie wypożyczenia.
+Użytkownicy będą mogli zakładać konta i logować się do nich, aby zarządzać swoimi danymi i historią wypożyczeń.
+W sekcji kontaktu będzie dostępny formularz do zgłaszania problemów i pytań.
+Korzyści:
+
+Wykorzystanie Dockera ułatwia wdrażanie i skalowanie aplikacji.
+Laravel zapewnia solidną bazę do tworzenia dynamicznych aplikacji webowych.
+Aplikacja będzie łatwa w użyciu i funkcjonalna, co ułatwi użytkownikom dostęp do książek i informacji o bibliotece.
+Dodatkowe funkcje:
+
+Możliwość dodawania recenzji książek
+System rekomendacji książek
+Integracja z mediami społecznościowymi
+Możliwość prolongowania wypożyczeń książek
+Podsumowanie:
+
+Zaktualizowany projekt biblioteki online z wykorzystaniem Dockera i Laravela to ambitny projekt, który ma na celu stworzenie funkcjonalnej i łatwej w użyciu aplikacji dla użytkowników. Wykorzystanie nowoczesnych technologii zapewnia skalowalność i łatwość utrzymania aplikacji.

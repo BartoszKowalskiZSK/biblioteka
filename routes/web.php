@@ -33,7 +33,9 @@ require __DIR__.'/auth.php';
 
 
 
-
+Route::get('/admin', function(){
+    return view('admin');
+})->name('admin');
 
 
 Route::get('/contact', function(){
